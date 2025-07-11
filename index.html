@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>温泉紹介サイト</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: #fff8f0;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+    header {
+      background-color: #6fb3c4;
+      color: white;
+      padding: 2rem 3rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.25rem;
+    }
+    header > div strong {
+      font-size: 2rem;
+    }
+    header nav a {
+      color: white;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .hero {
+      background-image: url('https://source.unsplash.com/1600x900/?onsen');
+      background-size: cover;
+      background-position: center;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      z-index: 1;
+    }
+    section {
+      padding: 4rem 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .manner-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+    }
+    .manner-item {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+    }
+    .manner-item img,
+    .manner-item iframe {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border: none;
+      border-bottom: 1px solid #ddd;
+    }
+    .manner-item p {
+      padding: 1rem;
+    }
+    .manner-item p span.cn {
+      display: block;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      header nav a {
+        margin-left: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div><strong style="font-size: 1.5rem;">Onsen Manners</strong></div>
+    <nav>
+      <a href="#about">紹介</a>
+      <a href="#manner">温泉マナー</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>プロジェクト紹介</h2>
+    <p>このサイトは、外国人にもわかりやすく温泉マナーを紹介するプロジェクトです。</p>
+  </section>
+
+  <section id="manner">
+    <h2>温泉マナー</h2>
+    <div class="manner-list">
+      <div class="manner-item">
+        <iframe src="https://www.youtube.com/embed/Z6g3STeYgIE" title="酔っての入浴は避ける" allowfullscreen></iframe>
+        <p>酔っての入浴は避ける。<span class="cn">饮酒后请勿入浴。</span></p>
+      </div>
+      <div class="manner-item">
+        <img src="https://source.unsplash.com/400x300/?shower" alt="シャワーを浴びる" />
+        <p>入浴前には体を洗いましょう。<span class="cn">入浴前请先冲洗身体。</span></p>
+      </div>
+      <div class="manner-item">
+        <img src="https://source.unsplash.com/400x300/?quiet" alt="静かに入る" />
+        <p>温泉では静かに過ごしましょう。<span class="cn">请在温泉中保持安静。</span></p>
+      </div>
+      <div class="manner-item">
+        <img src="https://source.unsplash.com/400x300/?hair" alt="髪をまとめる" />
+        <p>長い髪は束ねて入りましょう。<span class="cn">长发请扎起。</span></p>
+      </div>
+      <div class="manner-item">
+        <img src="https://source.unsplash.com/400x300/?tattoo" alt="入れ墨は控える" />
+        <p>入れ墨のある方は事前に確認を。<span class="cn">。</span></p>
+      </div>
+      <div class="manner-item">
+        <img src="https://source.unsplash.com/400x300/?camera" alt="写真撮影禁止" />
+        <p>浴場内での撮影は禁止です。<span class="cn">浴场内禁止拍照。</span></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Onsen Manners
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
